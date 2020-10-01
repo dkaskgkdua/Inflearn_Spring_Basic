@@ -27,6 +27,15 @@ import static org.assertj.core.api.Assertions.assertThat;
  * - 결론적으로 유연성이 떨어진다.
  * - 안티패턴으로 불리기도 한다.
  */
+
+/**
+ * 싱글톤 방식의 주의점
+ * - 무상태(stateless)로 설계해야 한다.
+ * - 특정 클라이언트에 의존적인 필드가 있으면 안된다.
+ * - 특정 클라이언트가 값을 변경할 수 있는 필드가 있으면 안된다.
+ * - 가급적 읽기만 가능해야 한다.
+ * - 필드대신에 자바에서 공유되지 않는, 지역변수, 파라미터, ThreadLocal 등을 사용해야한다.
+ */
 public class SingletonTest {
     @Test
     @DisplayName("스프링 없는 순수한 DI 컨테이너")
