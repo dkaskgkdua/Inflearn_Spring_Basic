@@ -12,7 +12,7 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/*
+/**
  *  Denpendency Injection 해준다!
  *  기존에는 개발자가 직접 DI를 했지만 이제는 스프링 컨테이너를 통해서 사용한다.
  *  스프링 컨테이너는 @Configuration이 붙은 AppConfig를 설정 정보로 사용한다.
@@ -20,6 +20,11 @@ import org.springframework.context.annotation.Configuration;
  *  이를 스프링 빈이라고 함.
  *  스프링 빈은 @Bean이 붙은 메서드의 명을 스프링 빈의 이름으로 사용함.(memberService, orderService)
  * */
+
+/**
+ * @Configuration을 붙이면 바이트코드를 조작하는 CGLIB 기술을 사용해서 싱글톤을 보장한다.
+ * 없을 경우 싱글톤을 보장하지 않는다. (빈 등록은 됨)
+ */
 @Configuration
 public class AppConfig {
 
