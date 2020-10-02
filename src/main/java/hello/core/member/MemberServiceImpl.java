@@ -1,5 +1,9 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class MemberServiceImpl implements MemberService{
     private final MemberRepository memberRepository;
     /*
@@ -8,6 +12,7 @@ public class MemberServiceImpl implements MemberService{
        오직 외부에서 결정된다.(AppConfig)
        이로써 관심사가 분리되었고 DIP가 완성되었다.
     * */
+    @Autowired // 의존관계 주입
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
