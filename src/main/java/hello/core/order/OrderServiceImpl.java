@@ -6,6 +6,7 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 *  - 항상 생성자 주입을 선택하되 가끔 옵션이 필요하면 수정자 주입을 선택!
 * */
 @Component
+@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     /*
     *  필드 주입
@@ -25,6 +27,18 @@ public class OrderServiceImpl implements OrderService {
     * */
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
+
+    @Override
+    public Order createOrder(Long memberId, String itemName, int itemPrice) {
+        Member member= memberRepository.findById(memberId);
+        int discountPrice = discountPolicy.discount(member, itemPrice);
+
+        return new Order(memberId, itemName, itemPrice, discountPrice);
+    }
+    // 테스트용도
+    public MemberRepository getMemberRepository() {
+        return memberRepository;
+    }
     /*
     *  일반 메서드 주입
     *  - 일반 메서드를 통해 주입 받을 수 있다.
@@ -50,22 +64,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
      */
-
+    /*
+    @RequiredArgsConstructor 를 사용하면
+    final 로 선언해준 필드를 기준으로 생성자를 만들어 준다.
+    아래 생성자는 없애주면 됨.
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
+    */
 
-    @Override
-    public Order createOrder(Long memberId, String itemName, int itemPrice) {
-        Member member= memberRepository.findById(memberId);
-        int discountPrice = discountPolicy.discount(member, itemPrice);
-
-        return new Order(memberId, itemName, itemPrice, discountPrice);
-    }
-    // 테스트용도
-    public MemberRepository getMemberRepository() {
-        return memberRepository;
-    }
 }
