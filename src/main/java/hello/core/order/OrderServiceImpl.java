@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 
 /*
 *  실행에만 집중하면 됨!
+*  생성자 주입
+*  - 생성자 주입 시 필드에 fianl 키워드를 사용할 수 있고 혹시라도 설정되지 않는 오류를 컴파일 시점에 막음
+*  - 항상 생성자 주입을 선택하되 가끔 옵션이 필요하면 수정자 주입을 선택!
 * */
 @Component
 public class OrderServiceImpl implements OrderService {
