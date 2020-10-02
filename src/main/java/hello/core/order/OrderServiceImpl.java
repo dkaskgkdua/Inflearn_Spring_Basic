@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
       수정자 주입(setter 주입)
       - 선택, 변경 가능성이 있는 의존관계에 사용
       - 주입할 대상이 없어도 동작하게 하려면 required =false 를 선언해주면 된다.
+        기본값은 true 임
     @Autowired(required = false)
     public void setMemberRepository(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
