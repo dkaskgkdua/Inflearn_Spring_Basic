@@ -3,6 +3,9 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class NetworkClient
         //implements InitializingBean, DisposableBean
                             {
@@ -38,11 +41,19 @@ public class NetworkClient
      * 내가 코드를 고칠 수 없는 외부 라이브러리에 적용할 수 없다.
      */
 
+    /*
+       @PostContruct, @PreDestroy
+       스프링에서 가장 권장하는 방법이며 어노테이션 하나만 붙이면 됨.
+       유일한 단점은 외부 라이브러리에서 적용하지 못한다는 점인데 이는
+       @Bean(init ~ 을 사용하자)
+    * */
+    @PostConstruct
     public void init(){
         System.out.println("NetworkClient.init");
         connect();
         call("초기화 연결 메시지");
     }
+    @PreDestroy
     public void close(){
         System.out.println("NetworkClient.close");
         disconnect();
