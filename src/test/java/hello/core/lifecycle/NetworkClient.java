@@ -3,7 +3,9 @@ package hello.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-public class NetworkClient implements InitializingBean, DisposableBean {
+public class NetworkClient
+        //implements InitializingBean, DisposableBean
+                            {
     private String url;
 
     public NetworkClient() {
@@ -36,6 +38,17 @@ public class NetworkClient implements InitializingBean, DisposableBean {
      * 내가 코드를 고칠 수 없는 외부 라이브러리에 적용할 수 없다.
      */
 
+    public void init(){
+        System.out.println("NetworkClient.init");
+        connect();
+        call("초기화 연결 메시지");
+    }
+    public void close(){
+        System.out.println("NetworkClient.close");
+        disconnect();
+    }
+
+    /*
     // 의존관계 주입이 끝나면
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -49,4 +62,6 @@ public class NetworkClient implements InitializingBean, DisposableBean {
         System.out.println("NetworkClient.destroy");
         disconnect();
     }
+    */
+
 }
