@@ -25,6 +25,7 @@ import org.springframework.context.annotation.Configuration;
  * - 초기화 콜백 : 빈이 생성되고, 빈의 의존관계 주입이 완료된 후 호출
  * - 소멸전 콜백 : 빈이 소멸되기 직전에 호출출
 */
+
 /**
  * 스프링은 크게 3가지 방법으로 빈 생명주기 콜백을 지원함.
  * - 인터페이스(InitializingBean, DisposalbleBean)
